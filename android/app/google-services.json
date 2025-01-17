@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "272198237449",
+    "project_id": "sealgonapp",
+    "storage_bucket": "sealgonapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272198237449:android:0762093480343e0dfa67d8",
+        "android_client_info": {
+          "package_name": "com.example.seal_gon_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBeHR0IOE6LyjMr-hz0_B_FmNbM0bChwA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

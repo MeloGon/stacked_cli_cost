@@ -5,6 +5,7 @@ import 'package:seal_gon_app/ui/views/startup/startup_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:seal_gon_app/ui/views/cost_calculator/cost_calculator_view.dart';
+import 'package:seal_gon_app/services/cost_calculator_service.dart';
 // @stacked-import
 
 @StackedApp(
@@ -18,7 +19,8 @@ import 'package:seal_gon_app/ui/views/cost_calculator/cost_calculator_view.dart'
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
-    // @stacked-service
+    LazySingleton(classType: CostCalculatorService),
+// @stacked-service
   ],
   bottomsheets: [
     StackedBottomsheet(classType: NoticeSheet),

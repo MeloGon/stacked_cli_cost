@@ -49,7 +49,7 @@ class CostCalculatorView extends StackedView<CostCalculatorViewModel>
       bottomNavigationBar: Container(
         padding: const EdgeInsets.all(15.0),
         child: ShadButton(
-          onPressed: () {},
+          onPressed: viewModel.calculate,
           child: const Text(ksConsult),
         ),
       ),
