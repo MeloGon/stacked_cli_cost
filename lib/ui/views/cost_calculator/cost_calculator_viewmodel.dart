@@ -8,8 +8,32 @@ class CostCalculatorViewModel extends BaseViewModel with $CostCalculatorView {
   final CostCalculatorService _costCalculatorService =
       locator<CostCalculatorService>();
 
-  void saveConsumption(Consumption consumption) {
-    //_costCalculatorService.saveConsumption();
+  void saveConsumption() async {
+    final listConsumption = [
+      Consumption(
+          previousConsumption: double.parse(firstDptoController.text),
+          currentConsumption: double.parse(
+              _costCalculatorService.firstDptoAmount.value.toStringAsFixed(2)),
+          ownerDpto: 'firstDpto'),
+      Consumption(
+          previousConsumption: double.parse(secondDptoController.text),
+          currentConsumption: double.parse(
+              _costCalculatorService.secondDptoAmount.value.toStringAsFixed(2)),
+          ownerDpto: 'secondDpto'),
+      Consumption(
+          previousConsumption: double.parse(thirdDptoController.text),
+          currentConsumption: double.parse(
+              _costCalculatorService.thirdDptoAmount.value.toStringAsFixed(2)),
+          ownerDpto: 'thirdDpto'),
+      Consumption(
+          previousConsumption: double.parse(quartDptoController.text),
+          currentConsumption: double.parse(
+              _costCalculatorService.quartDptoAmount.value.toStringAsFixed(2)),
+          ownerDpto: 'quartDpto'),
+    ];
+    for (Consumption consumption in listConsumption) {
+      await _costCalculatorService.saveConsumption(consumption);
+    }
   }
 
   List<ListenableServiceMixin> get listenableServices =>
@@ -39,28 +63,7 @@ class CostCalculatorViewModel extends BaseViewModel with $CostCalculatorView {
                     .lastQuartDptoConsumption.value?.previousConsumption ??
                 0));
 
-    final listConsumption = [
-      Consumption(
-          previousConsumption: double.parse(firstDptoController.text),
-          currentConsumption: _costCalculatorService.firstDptoAmount.value,
-          ownerDpto: 'firstDpto'),
-      Consumption(
-          previousConsumption: double.parse(secondDptoController.text),
-          currentConsumption: _costCalculatorService.secondDptoAmount.value,
-          ownerDpto: 'secondDpto'),
-      Consumption(
-          previousConsumption: double.parse(thirdDptoController.text),
-          currentConsumption: _costCalculatorService.thirdDptoAmount.value,
-          ownerDpto: 'thirdDpto'),
-      Consumption(
-          previousConsumption: double.parse(quartDptoController.text),
-          currentConsumption: _costCalculatorService.quartDptoAmount.value,
-          ownerDpto: 'quartDpto'),
-    ];
-
-    for (Consumption consumption in listConsumption) {
-      _costCalculatorService.saveConsumption(consumption);
-    }
+    saveConsumption();
   }
 
   double calculateAmount(double value) {
