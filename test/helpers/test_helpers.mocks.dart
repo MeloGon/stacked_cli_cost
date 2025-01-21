@@ -812,6 +812,19 @@ class MockCostCalculatorService extends _i1.Mock
       ) as _i2.ReactiveValue<_i9.Consumption?>);
 
   @override
+  _i2.ReactiveValue<bool> get isLoading => (super.noSuchMethod(
+        Invocation.getter(#isLoading),
+        returnValue: _FakeReactiveValue_0<bool>(
+          this,
+          Invocation.getter(#isLoading),
+        ),
+        returnValueForMissingStub: _FakeReactiveValue_0<bool>(
+          this,
+          Invocation.getter(#isLoading),
+        ),
+      ) as _i2.ReactiveValue<bool>);
+
+  @override
   int get listenersCount => (super.noSuchMethod(
         Invocation.getter(#listenersCount),
         returnValue: 0,

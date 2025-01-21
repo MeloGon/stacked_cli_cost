@@ -6,15 +6,15 @@ part 'consumption.freezed.dart';
 @JsonSerializable(explicitToJson: true)
 class Consumption with _$Consumption {
   const factory Consumption({
-    required double previousConsumption,
-    required double currentConsumption,
+    required double lastConsumptionReading,
+    required double lastConsumptionAmount,
     required String ownerDpto,
   }) = _Consumption;
 
   factory Consumption.fromFirestore(DocumentSnapshot doc) {
     return Consumption(
-      previousConsumption: doc['previousConsumption'],
-      currentConsumption: doc['currentConsumption'],
+      lastConsumptionReading: doc['previousConsumption'],
+      lastConsumptionAmount: doc['lastConsumptionAmount'],
       ownerDpto: doc['ownerDpto'],
     );
   }

@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$Consumption {
-  double get previousConsumption => throw _privateConstructorUsedError;
-  double get currentConsumption => throw _privateConstructorUsedError;
+  double get lastConsumptionReading => throw _privateConstructorUsedError;
+  double get lastConsumptionAmount => throw _privateConstructorUsedError;
   String get ownerDpto => throw _privateConstructorUsedError;
 
   /// Create a copy of Consumption
@@ -34,8 +34,8 @@ abstract class $ConsumptionCopyWith<$Res> {
       _$ConsumptionCopyWithImpl<$Res, Consumption>;
   @useResult
   $Res call(
-      {double previousConsumption,
-      double currentConsumption,
+      {double lastConsumptionReading,
+      double lastConsumptionAmount,
       String ownerDpto});
 }
 
@@ -54,18 +54,18 @@ class _$ConsumptionCopyWithImpl<$Res, $Val extends Consumption>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? previousConsumption = null,
-    Object? currentConsumption = null,
+    Object? lastConsumptionReading = null,
+    Object? lastConsumptionAmount = null,
     Object? ownerDpto = null,
   }) {
     return _then(_value.copyWith(
-      previousConsumption: null == previousConsumption
-          ? _value.previousConsumption
-          : previousConsumption // ignore: cast_nullable_to_non_nullable
+      lastConsumptionReading: null == lastConsumptionReading
+          ? _value.lastConsumptionReading
+          : lastConsumptionReading // ignore: cast_nullable_to_non_nullable
               as double,
-      currentConsumption: null == currentConsumption
-          ? _value.currentConsumption
-          : currentConsumption // ignore: cast_nullable_to_non_nullable
+      lastConsumptionAmount: null == lastConsumptionAmount
+          ? _value.lastConsumptionAmount
+          : lastConsumptionAmount // ignore: cast_nullable_to_non_nullable
               as double,
       ownerDpto: null == ownerDpto
           ? _value.ownerDpto
@@ -84,8 +84,8 @@ abstract class _$$ConsumptionImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {double previousConsumption,
-      double currentConsumption,
+      {double lastConsumptionReading,
+      double lastConsumptionAmount,
       String ownerDpto});
 }
 
@@ -102,18 +102,18 @@ class __$$ConsumptionImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? previousConsumption = null,
-    Object? currentConsumption = null,
+    Object? lastConsumptionReading = null,
+    Object? lastConsumptionAmount = null,
     Object? ownerDpto = null,
   }) {
     return _then(_$ConsumptionImpl(
-      previousConsumption: null == previousConsumption
-          ? _value.previousConsumption
-          : previousConsumption // ignore: cast_nullable_to_non_nullable
+      lastConsumptionReading: null == lastConsumptionReading
+          ? _value.lastConsumptionReading
+          : lastConsumptionReading // ignore: cast_nullable_to_non_nullable
               as double,
-      currentConsumption: null == currentConsumption
-          ? _value.currentConsumption
-          : currentConsumption // ignore: cast_nullable_to_non_nullable
+      lastConsumptionAmount: null == lastConsumptionAmount
+          ? _value.lastConsumptionAmount
+          : lastConsumptionAmount // ignore: cast_nullable_to_non_nullable
               as double,
       ownerDpto: null == ownerDpto
           ? _value.ownerDpto
@@ -127,20 +127,20 @@ class __$$ConsumptionImplCopyWithImpl<$Res>
 
 class _$ConsumptionImpl implements _Consumption {
   const _$ConsumptionImpl(
-      {required this.previousConsumption,
-      required this.currentConsumption,
+      {required this.lastConsumptionReading,
+      required this.lastConsumptionAmount,
       required this.ownerDpto});
 
   @override
-  final double previousConsumption;
+  final double lastConsumptionReading;
   @override
-  final double currentConsumption;
+  final double lastConsumptionAmount;
   @override
   final String ownerDpto;
 
   @override
   String toString() {
-    return 'Consumption(previousConsumption: $previousConsumption, currentConsumption: $currentConsumption, ownerDpto: $ownerDpto)';
+    return 'Consumption(lastConsumptionReading: $lastConsumptionReading, lastConsumptionAmount: $lastConsumptionAmount, ownerDpto: $ownerDpto)';
   }
 
   @override
@@ -148,17 +148,17 @@ class _$ConsumptionImpl implements _Consumption {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ConsumptionImpl &&
-            (identical(other.previousConsumption, previousConsumption) ||
-                other.previousConsumption == previousConsumption) &&
-            (identical(other.currentConsumption, currentConsumption) ||
-                other.currentConsumption == currentConsumption) &&
+            (identical(other.lastConsumptionReading, lastConsumptionReading) ||
+                other.lastConsumptionReading == lastConsumptionReading) &&
+            (identical(other.lastConsumptionAmount, lastConsumptionAmount) ||
+                other.lastConsumptionAmount == lastConsumptionAmount) &&
             (identical(other.ownerDpto, ownerDpto) ||
                 other.ownerDpto == ownerDpto));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, previousConsumption, currentConsumption, ownerDpto);
+      runtimeType, lastConsumptionReading, lastConsumptionAmount, ownerDpto);
 
   /// Create a copy of Consumption
   /// with the given fields replaced by the non-null parameter values.
@@ -171,14 +171,14 @@ class _$ConsumptionImpl implements _Consumption {
 
 abstract class _Consumption implements Consumption {
   const factory _Consumption(
-      {required final double previousConsumption,
-      required final double currentConsumption,
+      {required final double lastConsumptionReading,
+      required final double lastConsumptionAmount,
       required final String ownerDpto}) = _$ConsumptionImpl;
 
   @override
-  double get previousConsumption;
+  double get lastConsumptionReading;
   @override
-  double get currentConsumption;
+  double get lastConsumptionAmount;
   @override
   String get ownerDpto;
 

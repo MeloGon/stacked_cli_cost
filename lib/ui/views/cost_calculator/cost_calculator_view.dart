@@ -61,4 +61,7 @@ class CostCalculatorView extends StackedView<CostCalculatorViewModel>
     BuildContext context,
   ) =>
       CostCalculatorViewModel();
+
+  @override
+  void onViewModelReady(CostCalculatorViewModel viewModel) => viewModel.init();
 }

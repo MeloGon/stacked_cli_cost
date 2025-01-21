@@ -14,50 +14,49 @@ class PreviousConsumptionsWidget
       children: [
         ShadAccordionItem(
           value: 'past_readings',
-          title: Text(
-            'Ver lecturas del mes pasado',
+          title: const Text(
+            'Precios de los servicios del mes pasado',
           ),
           child: ShadCard(
-            child: Column(
-              spacing: 6,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Dpto. 101 F'),
-                    Text('590 Khz.'),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Dpto. 102 K'),
-                    Text('590 Khz.'),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Dpto. 103 P'),
-                    Text('590 Khz.'),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Dpto. 104 K'),
-                    Text('590 Khz.'),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Monto de Agua'),
-                    Text('S/. 590'),
-                  ],
-                ),
-              ],
-            ),
+            child: viewModel.isLoading
+                ? const Center(child: CircularProgressIndicator())
+                : Column(
+                    spacing: 6,
+                    children: [
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     const Text('Dpto. 101 F'),
+                      //     Text(
+                      //         's/.${viewModel.firstDptoLastAmount.toString()}'),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     const Text('Dpto. 102 K'),
+                      //     Text(
+                      //         's/.${viewModel.secondDptoLastAmount.toString()}'),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     const Text('Dpto. 103 P'),
+                      //     Text(
+                      //         's/.${viewModel.thirdDptoLastAmount.toString()}'),
+                      //   ],
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     const Text('Dpto. 104 K'),
+                      //     Text(
+                      //         's/.${viewModel.quartDptoLastAmount.toString()}'),
+                      //   ],
+                      // ),
+                    ],
+                  ),
           ),
         ),
       ],
