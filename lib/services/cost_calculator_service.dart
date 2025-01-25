@@ -7,14 +7,14 @@ class CostCalculatorService with ListenableServiceMixin {
   final ReactiveValue<double> firstDptoAmount = ReactiveValue<double>(0);
   final ReactiveValue<double> secondDptoAmount = ReactiveValue<double>(0);
   final ReactiveValue<double> thirdDptoAmount = ReactiveValue<double>(0);
-  final ReactiveValue<double> quartDptoAmount = ReactiveValue<double>(0);
+  final ReactiveValue<double> fourthDptoAmount = ReactiveValue<double>(0);
   final ReactiveValue<Consumption?> lastFirstDptoConsumption =
       ReactiveValue<Consumption?>(null);
   final ReactiveValue<Consumption?> lastSecondDptoConsumption =
       ReactiveValue<Consumption?>(null);
   final ReactiveValue<Consumption?> lastThirdDptoConsumption =
       ReactiveValue<Consumption?>(null);
-  final ReactiveValue<Consumption?> lastQuartDptoConsumption =
+  final ReactiveValue<Consumption?> lastFourthDptoConsumption =
       ReactiveValue<Consumption?>(null);
   final ReactiveValue<bool> isLoading = ReactiveValue<bool>(false);
 
@@ -23,11 +23,11 @@ class CostCalculatorService with ListenableServiceMixin {
       firstDptoAmount,
       secondDptoAmount,
       thirdDptoAmount,
-      quartDptoAmount,
+      fourthDptoAmount,
       lastFirstDptoConsumption,
       lastSecondDptoConsumption,
       lastThirdDptoConsumption,
-      lastQuartDptoConsumption,
+      lastFourthDptoConsumption,
       isLoading
     ]);
   }
@@ -38,20 +38,20 @@ class CostCalculatorService with ListenableServiceMixin {
       CollectionReference consumptions =
           FirebaseFirestore.instance.collection('consumptions');
       await consumptions.get().then((QuerySnapshot querySnapshot) {
-        for (var consumption in querySnapshot.docs) {
-          final consumptionModel = Consumption.fromFirestore(consumption);
-          switch (consumption["ownerDpto"]) {
-            case "firstDpto":
-              lastFirstDptoConsumption.value = consumptionModel;
+        for (var consumptionDoc in querySnapshot.docs) {
+          final consumption = Consumption.fromFirestore(consumptionDoc);
+          switch (consumption.ownerDpto) {
+            case 'firstDpto':
+              lastFirstDptoConsumption.value = consumption;
               break;
             case "secondDpto":
-              lastSecondDptoConsumption.value = consumptionModel;
+              lastSecondDptoConsumption.value = consumption;
               break;
             case "thirdDpto":
-              lastThirdDptoConsumption.value = consumptionModel;
+              lastThirdDptoConsumption.value = consumption;
               break;
-            case "quartDpto":
-              lastQuartDptoConsumption.value = consumptionModel;
+            case "fourthDpto":
+              lastFourthDptoConsumption.value = consumption;
               break;
             default:
           }
@@ -60,7 +60,7 @@ class CostCalculatorService with ListenableServiceMixin {
       isLoading.value = false;
       notifyListeners();
     } catch (e) {
-      debugPrint("Failed to fetch consumosssss***: $e");
+      debugPrint("Failed to fetch consumos***: $e");
     }
   }
 
@@ -78,7 +78,9 @@ class CostCalculatorService with ListenableServiceMixin {
           'lastConsumptionAmount': consumption.lastConsumptionAmount,
         });
       }
-    }).catchError((error) => debugPrint("Failed to fetch users: $error"));
+    }).catchError((error) {
+      debugPrint("Failed to fetch users: $error");
+    });
   }
 
   Future<void> addConsumption(Consumption consumption) {

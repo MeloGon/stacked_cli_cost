@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:seal_gon_app/ui/common/app_colors.dart';
+import 'package:seal_gon_app/app/extension/consumption_extension.dart';
 import 'package:seal_gon_app/ui/common/ui_helpers.dart';
+import 'package:seal_gon_app/ui/views/cost_calculator/cost_calculator_view.form.dart';
+import 'package:shadcn_ui/shadcn_ui.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -8,7 +10,8 @@ import 'info_alert_dialog_model.dart';
 
 const double _graphicSize = 60;
 
-class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
+class InfoAlertDialog extends StackedView<InfoAlertDialogModel>
+    with $CostCalculatorView {
   final DialogRequest request;
   final Function(DialogResponse) completer;
 
@@ -46,56 +49,78 @@ class InfoAlertDialog extends StackedView<InfoAlertDialogModel> {
                             fontSize: 16, fontWeight: FontWeight.w900),
                       ),
                       verticalSpaceTiny,
-                      Text(
-                        request.description!,
-                        style:
-                            const TextStyle(fontSize: 14, color: kcMediumGrey),
-                        maxLines: 3,
-                        softWrap: true,
+                      ShadCard(
+                        child: viewModel.isLoading
+                            ? const Center(child: CircularProgressIndicator())
+                            : Column(
+                                spacing: 6,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(viewModel.lastFirstDptoConsumption
+                                              ?.getDptoName() ??
+                                          ''),
+                                      Text('${firstDptoController.text} khz '),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(viewModel.lastSecondDptoConsumption
+                                              ?.getDptoName() ??
+                                          ''),
+                                      Text('${secondDptoController.text} khz '),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(viewModel.lastThirdDptoConsumption
+                                              ?.getDptoName() ??
+                                          ''),
+                                      Text('${thirdDptoController.text} khz '),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(viewModel.lastFourthDptoConsumption
+                                              ?.getDptoName() ??
+                                          ''),
+                                      Text('${quartDptoController.text} khz '),
+                                    ],
+                                  ),
+                                ],
+                              ),
                       ),
                     ],
                   ),
                 ),
-                Container(
-                  width: _graphicSize,
-                  height: _graphicSize,
-                  decoration: const BoxDecoration(
-                    color: Color(0xffF6E7B0),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(_graphicSize / 2),
-                    ),
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text(
-                    '⭐️',
-                    style: TextStyle(fontSize: 30),
-                  ),
-                )
               ],
             ),
             verticalSpaceMedium,
-            GestureDetector(
-              onTap: () => completer(DialogResponse(
-                confirmed: true,
-              )),
-              child: Container(
-                height: 50,
-                width: double.infinity,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Text(
-                  'Got it',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
+            ShadButton(
+              width: double.infinity,
+              child: const Text('Si'),
+              onPressed: () => completer(
+                DialogResponse(
+                  confirmed: true,
                 ),
               ),
-            )
+            ),
+            ShadButton.ghost(
+              child: const Text('No'),
+              onPressed: () => completer(
+                DialogResponse(
+                  confirmed: false,
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:seal_gon_app/app/extension/consumption_extension.dart';
 import 'package:seal_gon_app/ui/views/cost_calculator/cost_calculator_viewmodel.dart';
 import 'package:shadcn_ui/shadcn_ui.dart';
 
@@ -15,7 +16,7 @@ class PreviousConsumptionsWidget
         ShadAccordionItem(
           value: 'past_readings',
           title: const Text(
-            'Precios de los servicios del mes pasado',
+            'Precios de los servicios del último mes',
           ),
           child: ShadCard(
             child: viewModel.isLoading
@@ -23,38 +24,46 @@ class PreviousConsumptionsWidget
                 : Column(
                     spacing: 6,
                     children: [
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     const Text('Dpto. 101 F'),
-                      //     Text(
-                      //         's/.${viewModel.firstDptoLastAmount.toString()}'),
-                      //   ],
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     const Text('Dpto. 102 K'),
-                      //     Text(
-                      //         's/.${viewModel.secondDptoLastAmount.toString()}'),
-                      //   ],
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     const Text('Dpto. 103 P'),
-                      //     Text(
-                      //         's/.${viewModel.thirdDptoLastAmount.toString()}'),
-                      //   ],
-                      // ),
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //   children: [
-                      //     const Text('Dpto. 104 K'),
-                      //     Text(
-                      //         's/.${viewModel.quartDptoLastAmount.toString()}'),
-                      //   ],
-                      // ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(viewModel.lastFirstDptoConsumption
+                                  ?.getDptoName() ??
+                              ''),
+                          Text(
+                              's/.${viewModel.lastFirstDptoConsumption?.lastConsumptionAmount ?? 0}'),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(viewModel.lastSecondDptoConsumption
+                                  ?.getDptoName() ??
+                              ''),
+                          Text(
+                              's/.${viewModel.lastSecondDptoConsumption?.lastConsumptionAmount ?? 0}'),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(viewModel.lastThirdDptoConsumption
+                                  ?.getDptoName() ??
+                              ''),
+                          Text(
+                              's/.${viewModel.lastThirdDptoConsumption?.lastConsumptionAmount ?? 0}'),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(viewModel.lastFourthDptoConsumption
+                                  ?.getDptoName() ??
+                              ''),
+                          Text(
+                              's/.${viewModel.lastFourthDptoConsumption?.lastConsumptionAmount ?? 0}'),
+                        ],
+                      ),
                     ],
                   ),
           ),

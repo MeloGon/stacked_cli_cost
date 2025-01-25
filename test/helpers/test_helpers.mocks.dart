@@ -743,15 +743,15 @@ class MockCostCalculatorService extends _i1.Mock
       ) as _i2.ReactiveValue<double>);
 
   @override
-  _i2.ReactiveValue<double> get quartDptoAmount => (super.noSuchMethod(
-        Invocation.getter(#quartDptoAmount),
+  _i2.ReactiveValue<double> get fourthDptoAmount => (super.noSuchMethod(
+        Invocation.getter(#fourthDptoAmount),
         returnValue: _FakeReactiveValue_0<double>(
           this,
-          Invocation.getter(#quartDptoAmount),
+          Invocation.getter(#fourthDptoAmount),
         ),
         returnValueForMissingStub: _FakeReactiveValue_0<double>(
           this,
-          Invocation.getter(#quartDptoAmount),
+          Invocation.getter(#fourthDptoAmount),
         ),
       ) as _i2.ReactiveValue<double>);
 
@@ -798,16 +798,16 @@ class MockCostCalculatorService extends _i1.Mock
       ) as _i2.ReactiveValue<_i9.Consumption?>);
 
   @override
-  _i2.ReactiveValue<_i9.Consumption?> get lastQuartDptoConsumption =>
+  _i2.ReactiveValue<_i9.Consumption?> get lastFourthDptoConsumption =>
       (super.noSuchMethod(
-        Invocation.getter(#lastQuartDptoConsumption),
+        Invocation.getter(#lastFourthDptoConsumption),
         returnValue: _FakeReactiveValue_0<_i9.Consumption?>(
           this,
-          Invocation.getter(#lastQuartDptoConsumption),
+          Invocation.getter(#lastFourthDptoConsumption),
         ),
         returnValueForMissingStub: _FakeReactiveValue_0<_i9.Consumption?>(
           this,
-          Invocation.getter(#lastQuartDptoConsumption),
+          Invocation.getter(#lastFourthDptoConsumption),
         ),
       ) as _i2.ReactiveValue<_i9.Consumption?>);
 
@@ -842,10 +842,21 @@ class MockCostCalculatorService extends _i1.Mock
       ) as _i6.Future<void>);
 
   @override
-  _i6.Future<void> saveConsumption(_i9.Consumption? consumption) =>
+  _i6.Future<void> updateConsumption(_i9.Consumption? consumption) =>
       (super.noSuchMethod(
         Invocation.method(
-          #saveConsumption,
+          #updateConsumption,
+          [consumption],
+        ),
+        returnValue: _i6.Future<void>.value(),
+        returnValueForMissingStub: _i6.Future<void>.value(),
+      ) as _i6.Future<void>);
+
+  @override
+  _i6.Future<void> addConsumption(_i9.Consumption? consumption) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addConsumption,
           [consumption],
         ),
         returnValue: _i6.Future<void>.value(),

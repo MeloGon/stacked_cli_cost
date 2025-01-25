@@ -13,7 +13,7 @@ class Consumption with _$Consumption {
 
   factory Consumption.fromFirestore(DocumentSnapshot doc) {
     return Consumption(
-      lastConsumptionReading: doc['previousConsumption'],
+      lastConsumptionReading: doc['lastConsumptionReading'],
       lastConsumptionAmount: doc['lastConsumptionAmount'],
       ownerDpto: doc['ownerDpto'],
     );

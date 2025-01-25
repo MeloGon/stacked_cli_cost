@@ -1,35 +1,29 @@
+import 'package:seal_gon_app/app/app.dialogs.dart';
 import 'package:seal_gon_app/app/app.locator.dart';
 import 'package:seal_gon_app/models/consumption.dart';
 import 'package:seal_gon_app/services/cost_calculator_service.dart';
 import 'package:seal_gon_app/ui/views/cost_calculator/cost_calculator_view.form.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class CostCalculatorViewModel extends ReactiveViewModel
     with $CostCalculatorView {
   final CostCalculatorService _costCalculatorService =
       locator<CostCalculatorService>();
 
-  // double get firstDptoAmount => _costCalculatorService.firstDptoAmount.value;
-  // double get secondDptoAmount => _costCalculatorService.secondDptoAmount.value;
-  // double get thirdDptoAmount => _costCalculatorService.thirdDptoAmount.value;
-  // double get quartDptoAmount => _costCalculatorService.quartDptoAmount.value;
+  final DialogService _dialogService = locator<DialogService>();
 
-  // double get firstDptoPreviousConsumption =>
-  //     _costCalculatorService
-  //         .lastFirstDptoConsumption.value?.previousConsumption ??
-  //     0;
-  // double get secondDptoPreviousConsumption =>
-  //     _costCalculatorService
-  //         .lastSecondDptoConsumption.value?.previousConsumption ??
-  //     0;
-  // double get thirdDptoPreviousConsumption =>
-  //     _costCalculatorService
-  //         .lastThirdDptoConsumption.value?.previousConsumption ??
-  //     0;
-  // double get quartDptoPreviousConsumption =>
-  //     _costCalculatorService
-  //         .lastQuartDptoConsumption.value?.previousConsumption ??
-  //     0;
+  Consumption? get lastFirstDptoConsumption =>
+      _costCalculatorService.lastFirstDptoConsumption.value;
+
+  Consumption? get lastSecondDptoConsumption =>
+      _costCalculatorService.lastSecondDptoConsumption.value;
+
+  Consumption? get lastThirdDptoConsumption =>
+      _costCalculatorService.lastThirdDptoConsumption.value;
+
+  Consumption? get lastFourthDptoConsumption =>
+      _costCalculatorService.lastFourthDptoConsumption.value;
 
   bool get isLoading => _costCalculatorService.isLoading.value;
 
@@ -62,39 +56,49 @@ class CostCalculatorViewModel extends ReactiveViewModel
       Consumption(
           lastConsumptionReading: double.parse(quartDptoController.text),
           lastConsumptionAmount: double.parse(
-              _costCalculatorService.quartDptoAmount.value.toStringAsFixed(2)),
-          ownerDpto: 'quartDpto'),
+              _costCalculatorService.fourthDptoAmount.value.toStringAsFixed(2)),
+          ownerDpto: 'fourthDpto'),
     ];
     for (Consumption consumption in listConsumption) {
       // only if want add
       // await _costCalculatorService.addConsumption(consumption);
       await _costCalculatorService.updateConsumption(consumption);
     }
+    await _costCalculatorService.getConsumptions();
+  }
+
+  void showDialog() {
+    _dialogService.showCustomDialog(
+      variant: DialogType.infoAlert,
+      title: 'Las lecturas ingresadas son correctas ?',
+      description: 'Give stacked  stars on Github',
+    );
   }
 
   void calculate() async {
-    _costCalculatorService.firstDptoAmount.value = calculateAmount(
-        double.parse(firstDptoController.text) -
-            (_costCalculatorService
-                    .lastFirstDptoConsumption.value?.lastConsumptionReading ??
-                0));
-    _costCalculatorService.secondDptoAmount.value = calculateAmount(
-        double.parse(secondDptoController.text) -
-            (_costCalculatorService
-                    .lastSecondDptoConsumption.value?.lastConsumptionReading ??
-                0));
-    _costCalculatorService.thirdDptoAmount.value = calculateAmount(
-        double.parse(thirdDptoController.text) -
-            (_costCalculatorService
-                    .lastThirdDptoConsumption.value?.lastConsumptionReading ??
-                0));
-    _costCalculatorService.quartDptoAmount.value = calculateAmount(
-        double.parse(quartDptoController.text) -
-            (_costCalculatorService
-                    .lastQuartDptoConsumption.value?.lastConsumptionReading ??
-                0));
-
-    updateConsumption();
+    showDialog();
+    // _costCalculatorService.firstDptoAmount.value = calculateAmount(
+    //     double.parse(firstDptoController.text) -
+    //         (_costCalculatorService
+    //                 .lastFirstDptoConsumption.value?.lastConsumptionReading ??
+    //             0));
+    // _costCalculatorService.secondDptoAmount.value = calculateAmount(
+    //     double.parse(secondDptoController.text) -
+    //         (_costCalculatorService
+    //                 .lastSecondDptoConsumption.value?.lastConsumptionReading ??
+    //             0));
+    // _costCalculatorService.thirdDptoAmount.value = calculateAmount(
+    //     double.parse(thirdDptoController.text) -
+    //         (_costCalculatorService
+    //                 .lastThirdDptoConsumption.value?.lastConsumptionReading ??
+    //             0));
+    // _costCalculatorService.fourthDptoAmount.value = calculateAmount(
+    //     double.parse(quartDptoController.text) -
+    //         (_costCalculatorService
+    //                 .lastFourthDptoConsumption.value?.lastConsumptionReading ??
+    //             0));
+    //
+    // updateConsumption();
   }
 
   double calculateAmount(double value) {
