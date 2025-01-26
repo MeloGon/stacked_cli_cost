@@ -20,6 +20,7 @@ import 'package:seal_gon_app/services/cost_calculator_service.dart';
     LazySingleton(classType: DialogService),
     LazySingleton(classType: NavigationService),
     LazySingleton(classType: CostCalculatorService),
+    LazySingleton(classType: SnackbarService)
 // @stacked-service
   ],
   bottomsheets: [
