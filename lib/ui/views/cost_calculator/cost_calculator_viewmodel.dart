@@ -12,6 +12,7 @@ class CostCalculatorViewModel extends ReactiveViewModel
       locator<CostCalculatorService>();
 
   final DialogService _dialogService = locator<DialogService>();
+  final SnackbarService _snackbarService = locator<SnackbarService>();
 
   Consumption? get lastFirstDptoConsumption =>
       _costCalculatorService.lastFirstDptoConsumption.value;
@@ -26,6 +27,15 @@ class CostCalculatorViewModel extends ReactiveViewModel
       _costCalculatorService.lastFourthDptoConsumption.value;
 
   bool get isLoading => _costCalculatorService.isLoading.value;
+
+  bool get canConfirmConsumptions =>
+      firstDptoController.text.isNotEmpty &&
+      secondDptoController.text.isNotEmpty &&
+      thirdDptoController.text.isNotEmpty &&
+      quartDptoController.text.isNotEmpty &&
+      totalAmountController.text.isNotEmpty &&
+      totalConsumptionController.text.isNotEmpty &&
+      waterAmountController.text.isNotEmpty;
 
   @override
   List<ListenableServiceMixin> get listenableServices =>
@@ -67,38 +77,54 @@ class CostCalculatorViewModel extends ReactiveViewModel
     await _costCalculatorService.getConsumptions();
   }
 
-  void showDialog() {
-    _dialogService.showCustomDialog(
-      variant: DialogType.infoAlert,
-      title: 'Las lecturas ingresadas son correctas ?',
-      description: 'Give stacked  stars on Github',
+  void confirmConsumptions() async {
+    if (canConfirmConsumptions) {
+      var dialogResponse = await _dialogService.showCustomDialog(
+        variant: DialogType.infoAlert,
+        title: 'Las lecturas ingresadas son correctas ?',
+        description: 'Give stacked  stars on Github',
+      );
+
+      if (dialogResponse?.confirmed ?? false) {
+        calculate();
+      }
+    } else {
+      showSimpleToast('Hay algunos campos que no has llenado para continuar');
+    }
+  }
+
+  void showSimpleToast(String message) {
+    _snackbarService.showSnackbar(
+      message: message,
+      duration: const Duration(seconds: 2),
+      mainButtonTitle: 'OK',
+      onMainButtonTapped: () => print("Toast dismissed"),
     );
   }
 
   void calculate() async {
-    showDialog();
-    // _costCalculatorService.firstDptoAmount.value = calculateAmount(
-    //     double.parse(firstDptoController.text) -
-    //         (_costCalculatorService
-    //                 .lastFirstDptoConsumption.value?.lastConsumptionReading ??
-    //             0));
-    // _costCalculatorService.secondDptoAmount.value = calculateAmount(
-    //     double.parse(secondDptoController.text) -
-    //         (_costCalculatorService
-    //                 .lastSecondDptoConsumption.value?.lastConsumptionReading ??
-    //             0));
-    // _costCalculatorService.thirdDptoAmount.value = calculateAmount(
-    //     double.parse(thirdDptoController.text) -
-    //         (_costCalculatorService
-    //                 .lastThirdDptoConsumption.value?.lastConsumptionReading ??
-    //             0));
-    // _costCalculatorService.fourthDptoAmount.value = calculateAmount(
-    //     double.parse(quartDptoController.text) -
-    //         (_costCalculatorService
-    //                 .lastFourthDptoConsumption.value?.lastConsumptionReading ??
-    //             0));
-    //
-    // updateConsumption();
+    _costCalculatorService.firstDptoAmount.value = calculateAmount(
+        double.parse(firstDptoController.text) -
+            (_costCalculatorService
+                    .lastFirstDptoConsumption.value?.lastConsumptionReading ??
+                0));
+    _costCalculatorService.secondDptoAmount.value = calculateAmount(
+        double.parse(secondDptoController.text) -
+            (_costCalculatorService
+                    .lastSecondDptoConsumption.value?.lastConsumptionReading ??
+                0));
+    _costCalculatorService.thirdDptoAmount.value = calculateAmount(
+        double.parse(thirdDptoController.text) -
+            (_costCalculatorService
+                    .lastThirdDptoConsumption.value?.lastConsumptionReading ??
+                0));
+    _costCalculatorService.fourthDptoAmount.value = calculateAmount(
+        double.parse(quartDptoController.text) -
+            (_costCalculatorService
+                    .lastFourthDptoConsumption.value?.lastConsumptionReading ??
+                0));
+
+    updateConsumption();
   }
 
   double calculateAmount(double value) {
